@@ -10,6 +10,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["contracts", "test", "scripts", "sdk"],
-  "exclude": ["node_modules", "artifacts", "cache"]
+  "include": ["sdk", "cli"],
+  "exclude": ["node_modules", "artifacts", "cache", "test", "dashboard", "scripts"]
 }

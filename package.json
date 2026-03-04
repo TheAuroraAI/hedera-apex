@@ -5,8 +5,15 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "test:staking": "hardhat test test/ReputationStaking.test.ts",
     "deploy:testnet": "hardhat run scripts/deploy.ts --network hedera_testnet",
-    "typecheck": "tsc --noEmit"
+    "deploy:local": "hardhat run scripts/deploy.ts --network hardhat",
+    "demo": "hardhat run scripts/demo-integration.ts --network hardhat",
+    "demo:testnet": "hardhat run scripts/demo-integration.ts --network hedera_testnet",
+    "hcs:create-topic": "ts-node scripts/create-hcs-topic.ts",
+    "typecheck": "tsc --noEmit",
+    "sdk:build": "tsc --outDir dist --declaration",
+    "cli": "ts-node cli/hacp.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",

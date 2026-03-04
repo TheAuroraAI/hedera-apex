@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["hardhat/types/runtime", "node", "mocha"],
+    "skipLibCheck": true
+  },
+  "include": ["scripts", "test", "hardhat.config.ts"],
+  "exclude": ["node_modules", "artifacts", "cache", "sdk", "cli", "dashboard"]
+}
