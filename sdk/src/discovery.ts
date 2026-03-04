@@ -86,7 +86,7 @@ export class HCSDiscoveryClient {
       .setMessage(payload)
       .execute(this.client);
 
-    const receipt = await tx.getReceipt(this.client);
+    await tx.getReceipt(this.client);
     return tx.transactionId?.toString() ?? "unknown";
   }
 

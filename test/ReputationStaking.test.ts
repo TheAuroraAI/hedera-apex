@@ -8,7 +8,6 @@ import {
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
 const HTS_PRECOMPILE_ADDRESS = "0x0000000000000000000000000000000000000167";
-const SUCCESS_RESPONSE = "0x" + "0".repeat(62) + "16"; // int64 22 = 0x16, right-padded to 32 bytes
 
 describe("ReputationStaking", function () {
   let registry: AgentRegistry;

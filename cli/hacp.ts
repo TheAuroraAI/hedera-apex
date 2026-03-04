@@ -86,6 +86,8 @@ function fatal(msg: string): never {
   process.exit(1);
 }
 
+const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+
 function ok(label: string, value?: string | number | bigint) {
   if (value !== undefined) {
     console.log(`  ${label}: ${value}`);
@@ -403,7 +405,7 @@ job
       console.log(`\n  Job #${j.id}: ${j.title}`);
       ok("Status", formatJobStatus(j.status));
       ok("Client", truncateAddress(j.client));
-      ok("Agent", j.agent === ethers_ZERO_ADDR ? "(none)" : truncateAddress(j.agent));
+      ok("Agent", j.agent === ZERO_ADDRESS ? "(none)" : truncateAddress(j.agent));
       ok("Payment", `${tinybarsTohbar(j.payment)} HBAR`);
       ok("Capability", j.requiredCapability);
       ok("Posted", formatTimestamp(j.postedAt));
@@ -443,9 +445,6 @@ job
       printTx(result);
     });
   });
-
-// ============ Placeholder for zero address ============
-const ethers_ZERO_ADDR = "0x0000000000000000000000000000000000000000";
 
 // ============ staking subcommand ============
 
