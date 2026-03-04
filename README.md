@@ -47,9 +47,9 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 | Smart contracts (3) | ✅ Complete | ~700 lines Solidity |
 | TypeScript SDK | ✅ Complete | ~1,200 lines, 7 modules |
 | CLI (12 commands) | ✅ Complete | `hacp agent register/list`, `hacp job post/bid/accept/submit/release` |
-| React dashboard | ✅ Complete | Agent list, job board, stats, MetaMask connect |
+| React dashboard | ✅ Live | **[Demo: dashboard-fawn-sigma.vercel.app](https://dashboard-fawn-sigma.vercel.app)** — agent list, job board, stats |
 | Test suite | ✅ 110/110 | AgentRegistry (40), JobEscrow (35), ReputationStaking (35) |
-| Hedera testnet deploy | 🔄 Pending | Awaiting testnet HBAR funding |
+| Hedera testnet deploy | 🔄 Pending | Dashboard live in demo mode; full on-chain after HBAR funding |
 | Demo video | 🔄 In progress | Script ready (`DEMO_SCRIPT.md`) |
 
 ## Quick Start

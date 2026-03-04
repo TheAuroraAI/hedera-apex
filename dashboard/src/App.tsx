@@ -7,6 +7,9 @@ import ConnectWallet from "./components/ConnectWallet";
 import PostJobModal from "./components/PostJobModal";
 import { CONTRACTS, REGISTRY_ABI, ESCROW_ABI } from "./contracts";
 import type { Agent, Job } from "./types";
+import { MOCK_AGENTS, MOCK_JOBS } from "./mockData";
+
+const IS_DEMO = CONTRACTS.AgentRegistry === "0x0000000000000000000000000000000000000000";
 
 // ─── Styles ─────────────────────────────────────────────────────────────────
 
@@ -135,6 +138,13 @@ export default function App() {
   }, [provider]);
 
   const loadData = useCallback(async () => {
+    // Demo mode: use mock data until testnet contracts are deployed
+    if (IS_DEMO) {
+      setAgents(MOCK_AGENTS);
+      setJobs(MOCK_JOBS);
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
@@ -254,6 +264,11 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {IS_DEMO && (
+            <span style={{ padding: "4px 10px", background: "rgba(234,179,8,0.15)", border: "1px solid rgba(234,179,8,0.4)", borderRadius: 20, fontSize: 12, color: "#fbbf24", fontWeight: 600 }}>
+              DEMO MODE
+            </span>
+          )}
           <span style={styles.networkBadge}>Hedera Testnet</span>
           <ConnectWallet account={account} onConnect={connectWallet} />
         </div>
