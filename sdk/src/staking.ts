@@ -3,7 +3,7 @@
  */
 
 import { ethers, ContractTransactionResponse } from "ethers";
-import type { StakeRecord, TransactionResult } from "./types.js";
+import type { StakeRecord, TransactionResult } from "./types";
 
 const STAKING_ABI = [
   "function stake(uint256 amount) external",

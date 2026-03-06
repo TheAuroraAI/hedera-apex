@@ -39,11 +39,11 @@
  * ```
  */
 
-export { HACPClient } from "./client.js";
-export { AgentRegistryClient } from "./registry.js";
-export { JobEscrowClient } from "./escrow.js";
-export { ReputationStakingClient } from "./staking.js";
-export { HCSDiscoveryClient } from "./discovery.js";
+export { HACPClient } from "./client";
+export { AgentRegistryClient } from "./registry";
+export { JobEscrowClient } from "./escrow";
+export { ReputationStakingClient } from "./staking";
+export { HCSDiscoveryClient } from "./discovery";
 
 export type {
   Agent,
@@ -58,13 +58,13 @@ export type {
   PlaceBidParams,
   TransactionResult,
   FindAgentsResult,
-} from "./types.js";
+} from "./types";
 
 export {
   AgentStatus,
   JobStatus,
   HCSMessageType,
-} from "./types.js";
+} from "./types";
 
 export {
   hbarToTinybars,
@@ -76,4 +76,4 @@ export {
   deadlineFromDays,
   truncateAddress,
   parseIntSafe,
-} from "./utils.js";
+} from "./utils";

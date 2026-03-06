@@ -51,7 +51,7 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 | Test suite | ✅ 110/110 | AgentRegistry (40), JobEscrow (35), ReputationStaking (35) |
 | Hedera testnet deploy | ✅ Deployed | All 4 contracts live — see addresses below |
 | HCS discovery topic | ✅ Live | Topic `0.0.8099681` — agent announcement/discovery |
-| Demo video | 🔄 In progress | Script ready (`DEMO_SCRIPT.md`) |
+| Demo recording | ✅ Live | **[asciinema.org/a/v6hNy1oWYFjCxk0F](https://asciinema.org/a/v6hNy1oWYFjCxk0F)** — full end-to-end CLI + testnet demo |
 
 ## Deployed Contracts (Hedera Testnet — 2026-03-06)
 

@@ -9,8 +9,8 @@ import type {
   PostJobParams,
   PlaceBidParams,
   TransactionResult,
-} from "./types.js";
-import { hbarToTinybars } from "./utils.js";
+} from "./types";
+import { hbarToTinybars } from "./utils";
 
 const ESCROW_ABI = [
   "function postJob(string title, string description, string requiredCapability, uint256 deadline, uint256 autoReleaseDelay) external payable returns (uint256)",

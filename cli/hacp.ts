@@ -19,8 +19,8 @@ import {
   truncateAddress,
   deadlineFromDays,
   parseIntSafe,
-} from "../sdk/src/index.js";
-import type { HACPConfig } from "../sdk/src/index.js";
+} from "../sdk/src/index";
+import type { HACPConfig } from "../sdk/src/index";
 
 // Load .env from cwd or project root
 dotenvConfig({ path: resolve(process.cwd(), ".env") });
@@ -43,10 +43,10 @@ program
 // ============ Helpers ============
 
 function getConfig(opts: Record<string, unknown>): HACPConfig {
-  const rpcUrl = opts.rpc ?? process.env.HEDERA_RPC_URL;
-  const privateKey = opts.key ?? process.env.PRIVATE_KEY;
-  const registryAddress = opts.registry ?? process.env.REGISTRY_ADDRESS;
-  const escrowAddress = opts.escrow ?? process.env.ESCROW_ADDRESS;
+  const rpcUrl = (opts.rpc as string | undefined) ?? process.env.HEDERA_RPC_URL;
+  const privateKey = (opts.key as string | undefined) ?? process.env.PRIVATE_KEY;
+  const registryAddress = (opts.registry as string | undefined) ?? process.env.REGISTRY_ADDRESS;
+  const escrowAddress = (opts.escrow as string | undefined) ?? process.env.ESCROW_ADDRESS;
 
   if (!rpcUrl) fatal("Missing --rpc or HEDERA_RPC_URL");
   if (!privateKey) fatal("Missing --key or PRIVATE_KEY");
@@ -54,13 +54,13 @@ function getConfig(opts: Record<string, unknown>): HACPConfig {
   if (!escrowAddress) fatal("Missing --escrow or ESCROW_ADDRESS");
 
   return {
-    rpcUrl,
-    privateKey,
-    registryAddress,
-    escrowAddress,
-    stakingAddress: opts.staking ?? process.env.STAKING_ADDRESS,
-    operatorAccountId: opts.account ?? process.env.HEDERA_ACCOUNT_ID,
-    discoveryTopicId: opts.topic ?? process.env.HCS_DISCOVERY_TOPIC,
+    rpcUrl: rpcUrl!,
+    privateKey: privateKey!,
+    registryAddress: registryAddress!,
+    escrowAddress: escrowAddress!,
+    stakingAddress: (opts.staking as string | undefined) ?? process.env.STAKING_ADDRESS,
+    operatorAccountId: (opts.account as string | undefined) ?? process.env.HEDERA_ACCOUNT_ID,
+    discoveryTopicId: (opts.topic as string | undefined) ?? process.env.HCS_DISCOVERY_TOPIC,
     network: (opts.network ?? process.env.HEDERA_NETWORK ?? "testnet") as
       | "testnet"
       | "mainnet"

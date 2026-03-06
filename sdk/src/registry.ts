@@ -9,8 +9,8 @@ import type {
   UpdateAgentParams,
   FindAgentsResult,
   TransactionResult,
-} from "./types.js";
-import { hbarToTinybars } from "./utils.js";
+} from "./types";
+import { hbarToTinybars } from "./utils";
 
 // Minimal ABI — only the functions we call
 const REGISTRY_ABI = [

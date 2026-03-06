@@ -14,7 +14,7 @@ import {
   TransactionReceiptQuery,
   TransactionId,
 } from "@hashgraph/sdk";
-import type { HCSAgentMessage, HCSMessageType } from "./types.js";
+import type { HCSAgentMessage, HCSMessageType } from "./types";
 
 export interface HCSDiscoveryConfig {
   /** Hedera account ID (e.g. "0.0.12345") */

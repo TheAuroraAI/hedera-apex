@@ -4,12 +4,12 @@
  */
 
 import { ethers } from "ethers";
-import { AgentRegistryClient } from "./registry.js";
-import { JobEscrowClient } from "./escrow.js";
-import { ReputationStakingClient } from "./staking.js";
-import { HCSDiscoveryClient } from "./discovery.js";
-import type { HACPConfig } from "./types.js";
-import { parsePrivateKey } from "./utils.js";
+import { AgentRegistryClient } from "./registry";
+import { JobEscrowClient } from "./escrow";
+import { ReputationStakingClient } from "./staking";
+import { HCSDiscoveryClient } from "./discovery";
+import type { HACPConfig } from "./types";
+import { parsePrivateKey } from "./utils";
 
 export class HACPClient {
   public readonly registry: AgentRegistryClient;
