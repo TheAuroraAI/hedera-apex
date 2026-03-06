@@ -13,20 +13,22 @@
     "hcs:create-topic": "ts-node scripts/create-hcs-topic.ts",
     "typecheck": "tsc --noEmit",
     "sdk:build": "tsc --outDir dist --declaration",
-    "cli": "ts-node cli/hacp.ts"
+    "cli": "ts-node cli/hacp.ts",
+    "ai-demo": "ts-node --transpile-only scripts/ai-agent-demo.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^20.0.0",
     "hardhat": "^2.22.0",
-    "typescript": "^5.3.0",
     "ts-node": "^10.9.2",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.3.0"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@hashgraph/sdk": "^2.51.0",
     "@openzeppelin/contracts": "^5.0.0",
-    "ethers": "^6.13.0",
+    "commander": "^12.0.0",
     "dotenv": "^16.4.0",
-    "commander": "^12.0.0"
+    "ethers": "^6.13.0"
   }
 }

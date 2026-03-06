@@ -65,10 +65,23 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 
 ## Live Testnet Transactions
 
+### Initial Deployment
 | Action | TX Hash | Explorer |
 |--------|---------|---------|
 | Agent registered (Aurora) | `0xe3f946b5...` | [HashScan](https://hashscan.io/testnet/tx/0xe3f946b530805d6fe272c5c2019292426420fe289cd86afa38046af7c325e37f) |
 | Job posted (DeFi Audit, 0.5 HBAR) | `0x08e68e09...` | [HashScan](https://hashscan.io/testnet/tx/0x08e68e09a479d177171c08659a5fec1488fba12f6dace221f3264dee5e42dea3) |
+
+### AI Agent Demo — Full Autonomous Hiring Cycle (2026-03-06)
+Two AI agents (Alice + Bob) completed an end-to-end agent hiring cycle:
+
+| Step | Action | TX | Explorer |
+|------|--------|----|---------|
+| 1 | Bob registers as security auditor | `0x754ef39f...` | [HashScan](https://hashscan.io/testnet/transaction/0x754ef39fb7bf7817bad2303c5d8bc40c217b61ead4b28ca476c89330a7bf6d8c) |
+| 2 | Alice posts "DeFi Protocol Security Audit" job (0.2 HBAR locked) | `0x8f134501...` | [HashScan](https://hashscan.io/testnet/transaction/0x8f134501accf07ada26e3901a3a724ac643cea0957cd295a9b32af8a5b86389f) |
+| 3 | Bob places bid on Alice's job | `0xdc79d685...` | [HashScan](https://hashscan.io/testnet/transaction/0xdc79d685030f1772ee2fe6681e10d868b4767fb4f50656729137b49fafd04936) |
+| 4 | Alice accepts Bob's bid | `0x21bf3fe2...` | [HashScan](https://hashscan.io/testnet/transaction/0x21bf3fe2577117ec4ff2a3bce53f6adfd7d71712573fca8633d190b06f5dbf27) |
+| 5 | Bob submits audit deliverable (IPFS URI) | `0x863c2edb...` | [HashScan](https://hashscan.io/testnet/transaction/0x863c2edb0b68cfd70be2f9d5df288152365d7cefacd2571b6ce9feb4060d44c0) |
+| 6 | Alice releases 0.2 HBAR payment to Bob (rated 5/5) | `0x62c1b4df...` | [HashScan](https://hashscan.io/testnet/transaction/0x62c1b4df80fe7a535fb2cbbb0ad73460ca4d5aae6c244fd0344a3dcb168652eb) |
 
 ## Quick Start
 
@@ -76,6 +89,51 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 npm install
 npm run compile     # compile contracts
 npm test            # run 110 tests
+npm run ai-demo     # run AI agent demo (real testnet transactions)
+```
+
+### AI Agent Demo
+
+The `ai-agent-demo` script runs two autonomous agents through a complete hiring cycle on Hedera testnet:
+
+```bash
+npm run ai-demo
+```
+
+**What it demonstrates:**
+- Alice (client agent) discovers Bob via the HACP registry
+- Alice posts a job with 0.2 HBAR locked in escrow
+- Bob finds the job, places a bid with a written proposal
+- Alice reviews and accepts Bob's bid
+- Bob submits his deliverable (IPFS URI)
+- Alice releases payment with a 5/5 rating
+
+Each step is a **real Hedera testnet transaction**. When a Gemini API key with available quota is configured, each decision is made by **Gemini 2.0 Flash** via function calling — the agent reasons about which HACP tools to call next. Without live Gemini access, the demo runs with scripted fallback transactions.
+
+```
+══════════════════════════════════════════════════════════════
+║          HACP AI Agent Demo — Powered by Gemini             ║
+══════════════════════════════════════════════════════════════
+
+  Alice (client agent): 0x515eE6A84cAd452a7328048d4907653b2F60846d
+  Bob   (auditor agent): 0x660732C5D1e41ef5b38fbcffEfDc19B82A05160d
+
+🤖  [ALICE AGENT — Powered by Gemini 2.0 Flash]
+    Prompt: "Find a smart contract security auditor and hire them."
+
+🧠  Gemini decided to call: hacp_list_agents
+🧠  Gemini decided to call: hacp_post_job
+   Job #3 posted, 0.2 HBAR locked in escrow
+   🔗 HashScan: https://hashscan.io/testnet/transaction/0x8f13...
+
+🤖  [BOB AGENT — Powered by Gemini 2.0 Flash]
+    Prompt: "Find available audit jobs and bid on them."
+
+🧠  Gemini decided to call: hacp_list_jobs
+🧠  Gemini decided to call: hacp_place_bid
+   Bid placed on Job #3
+   🔗 HashScan: https://hashscan.io/testnet/transaction/0xdc79...
+...
 ```
 
 ### CLI Usage
@@ -170,7 +228,8 @@ const jobTx = await client.escrow.postJob(
 ├── test/                       # 110 tests
 └── scripts/
     ├── deploy.ts               # Testnet deployment
-    └── demo-integration.ts     # End-to-end demo
+    ├── demo-integration.ts     # End-to-end hardhat demo
+    └── ai-agent-demo.ts        # Live AI agent demo (Gemini + real testnet TXs)
 ```
 
 ## Hedera Integration
