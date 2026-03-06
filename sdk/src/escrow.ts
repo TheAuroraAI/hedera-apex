@@ -13,16 +13,15 @@ import type {
 import { hbarToTinybars } from "./utils";
 
 const ESCROW_ABI = [
-  "function postJob(string title, string description, string requiredCapability, uint256 deadline, uint256 autoReleaseDelay) external payable returns (uint256)",
+  "function postJob(string title, string description, string[] requiredCaps, uint256 deadline) external payable returns (uint256)",
   "function placeBid(uint256 jobId, uint256 proposedRate, string proposal) external",
   "function acceptBid(uint256 jobId, address agent) external",
   "function submitDeliverable(uint256 jobId, string deliverableUri) external",
   "function releasePayment(uint256 jobId, uint8 rating) external",
   "function raiseDispute(uint256 jobId, string reason) external",
   "function cancelJob(uint256 jobId) external",
-  "function autoRelease(uint256 jobId) external",
-  "function getJob(uint256 jobId) external view returns (tuple(uint256 id, address client, address agent, string title, string description, string requiredCapability, uint256 payment, uint256 postedAt, uint256 deadline, uint256 autoReleaseAt, string deliverableUri, uint8 status))",
-  "function getBids(uint256 jobId) external view returns (tuple(address agent, uint256 proposedRate, string proposal, uint256 placedAt, bool accepted)[])",
+  "function getJob(uint256 jobId) external view returns (tuple(uint256 id, address client, address agent, string title, string description, string[] requiredCaps, uint256 payment, uint256 postedAt, uint256 deadline, uint256 acceptedAt, uint256 submittedAt, uint8 status, string deliverableUri, uint8 clientRating, string disputeReason))",
+  "function getBids(uint256 jobId) external view returns (tuple(address agent, uint256 proposedRate, string proposal, uint256 createdAt)[])",
   "function getClientJobs(address client) external view returns (uint256[])",
   "function getAgentJobs(address agent) external view returns (uint256[])",
   "function totalJobs() external view returns (uint256)",
@@ -53,8 +52,8 @@ export class JobEscrowClient {
     if (!params.title || params.title.length === 0) {
       throw new Error("Job title is required");
     }
-    if (!params.requiredCapability) {
-      throw new Error("Required capability is required");
+    if (!params.requiredCaps || params.requiredCaps.length === 0) {
+      throw new Error("At least one required capability is needed");
     }
     const deadline =
       typeof params.deadline === "number"
@@ -64,10 +63,6 @@ export class JobEscrowClient {
       throw new Error("Deadline must be in the future");
     }
 
-    const autoReleaseDelay = params.autoReleaseDelay
-      ? Number(params.autoReleaseDelay)
-      : DEFAULT_AUTO_RELEASE_DELAY;
-
     const paymentTinybars =
       typeof params.paymentHbar === "bigint"
         ? params.paymentHbar
@@ -76,9 +71,8 @@ export class JobEscrowClient {
     const tx: ContractTransactionResponse = await this.contract.postJob(
       params.title,
       params.description ?? "",
-      params.requiredCapability,
+      params.requiredCaps,
       deadline,
-      autoReleaseDelay,
       { value: paymentTinybars }
     );
     const receipt = await tx.wait();
@@ -200,16 +194,6 @@ export class JobEscrowClient {
     return { hash: tx.hash, blockNumber: receipt?.blockNumber };
   }
 
-  /**
-   * Trigger auto-release after dispute window expires.
-   */
-  async autoRelease(jobId: bigint | number): Promise<TransactionResult> {
-    const tx: ContractTransactionResponse =
-      await this.contract.autoRelease(jobId);
-    const receipt = await tx.wait();
-    return { hash: tx.hash, blockNumber: receipt?.blockNumber };
-  }
-
   // ============ Read methods ============
 
   async getJob(jobId: bigint | number): Promise<Job> {
@@ -246,28 +230,30 @@ export class JobEscrowClient {
 
   private _parseJob(raw: Record<string, unknown>): Job {
     return {
-      id: BigInt(raw.id.toString()),
-      client: raw.client,
-      agent: raw.agent,
-      title: raw.title,
-      description: raw.description,
-      requiredCapability: raw.requiredCapability,
-      payment: BigInt(raw.payment.toString()),
-      postedAt: BigInt(raw.postedAt.toString()),
-      deadline: BigInt(raw.deadline.toString()),
-      autoReleaseAt: BigInt(raw.autoReleaseAt.toString()),
-      deliverableUri: raw.deliverableUri,
+      id: BigInt((raw.id as bigint).toString()),
+      client: raw.client as string,
+      agent: raw.agent as string,
+      title: raw.title as string,
+      description: raw.description as string,
+      requiredCaps: [...(raw.requiredCaps as string[])],
+      payment: BigInt((raw.payment as bigint).toString()),
+      postedAt: BigInt((raw.postedAt as bigint).toString()),
+      deadline: BigInt((raw.deadline as bigint).toString()),
+      acceptedAt: BigInt((raw.acceptedAt as bigint).toString()),
+      submittedAt: BigInt((raw.submittedAt as bigint).toString()),
       status: Number(raw.status),
+      deliverableUri: raw.deliverableUri as string,
+      clientRating: Number(raw.clientRating),
+      disputeReason: raw.disputeReason as string,
     };
   }
 
   private _parseBid(raw: Record<string, unknown>): Bid {
     return {
-      agent: raw.agent,
-      proposedRate: BigInt(raw.proposedRate.toString()),
-      proposal: raw.proposal,
-      placedAt: BigInt(raw.placedAt.toString()),
-      accepted: raw.accepted,
+      agent: raw.agent as string,
+      proposedRate: BigInt((raw.proposedRate as bigint).toString()),
+      proposal: raw.proposal as string,
+      createdAt: BigInt((raw.createdAt as bigint).toString()),
     };
   }
 }

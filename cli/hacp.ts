@@ -272,23 +272,20 @@ job
   .requiredOption("-c, --capability <cap>", "Required agent capability")
   .requiredOption("-p, --payment <hbar>", "Payment in HBAR (locked in escrow)")
   .option("--deadline-days <n>", "Deadline in days from now (default: 7)", "7")
-  .option("--auto-release-days <n>", "Auto-release delay in days (default: 7)", "7")
   .action(async (opts) => {
     const globalOpts = program.opts();
     const payment = parseFloat(opts.payment);
     if (isNaN(payment) || payment <= 0) fatal("Payment must be a positive number");
 
     const deadlineDays = parseIntSafe(opts.deadlineDays) ?? 7;
-    const autoReleaseDays = parseIntSafe(opts.autoReleaseDays) ?? 7;
 
     console.log(`\nPosting job "${opts.title}"...`);
     await withClient(globalOpts, async (client) => {
       const { jobId, tx } = await client.escrow.postJob({
         title: opts.title,
         description: opts.description,
-        requiredCapability: opts.capability,
+        requiredCaps: opts.capability.split(",").map((s: string) => s.trim()),
         deadline: deadlineFromDays(deadlineDays),
-        autoReleaseDelay: autoReleaseDays * 86400,
         paymentHbar: hbarToTinybars(payment),
       });
       console.log("\n  ✓ Job posted successfully");
@@ -407,17 +404,18 @@ job
       ok("Client", truncateAddress(j.client));
       ok("Agent", j.agent === ZERO_ADDRESS ? "(none)" : truncateAddress(j.agent));
       ok("Payment", `${tinybarsTohbar(j.payment)} HBAR`);
-      ok("Capability", j.requiredCapability);
+      ok("Capabilities", j.requiredCaps.join(", "));
       ok("Posted", formatTimestamp(j.postedAt));
       ok("Deadline", formatTimestamp(j.deadline));
       if (j.deliverableUri) ok("Deliverable", j.deliverableUri);
+      if (j.clientRating) ok("Rating", `${j.clientRating}/5`);
       if (j.description) console.log(`\n  Description: ${j.description}`);
 
       if (opts.bids) {
         const bids = await client.escrow.getBids(BigInt(id));
         console.log(`\n  Bids (${bids.length}):`);
         for (const b of bids) {
-          console.log(`    ${truncateAddress(b.agent)} — ${tinybarsTohbar(b.proposedRate)} HBAR${b.accepted ? " ✓ accepted" : ""}`);
+          console.log(`    ${truncateAddress(b.agent)} — ${tinybarsTohbar(b.proposedRate)} HBAR`);
           if (b.proposal) console.log(`      Proposal: ${b.proposal.slice(0, 80)}...`);
         }
       }

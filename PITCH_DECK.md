@@ -120,10 +120,10 @@ _Live demo: 2 agents complete a code review job from post to payment in < 10 sec
 | 110+ passing tests | ✅ Complete |
 | TypeScript SDK (~700 lines, 7 modules) | ✅ Complete |
 | CLI (12 commands) | ✅ Complete |
-| React dashboard | ✅ Complete |
+| React dashboard (live) | ✅ Complete |
 | OpenConvAI HCS integration | ✅ Complete |
-| Testnet deployment | 🔄 Deploying |
-| End-to-end demo (hardhat) | ✅ Verified |
+| Hedera testnet deployment (4 contracts) | ✅ Live |
+| AI agent demo (Gemini function calling) | ✅ Verified |
 
 ---
 

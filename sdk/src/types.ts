@@ -60,29 +60,30 @@ export interface Job {
   agent: string;
   title: string;
   description: string;
-  requiredCapability: string;
+  requiredCaps: string[];
   payment: bigint;
   postedAt: bigint;
   deadline: bigint;
-  autoReleaseAt: bigint;
-  deliverableUri: string;
+  acceptedAt: bigint;
+  submittedAt: bigint;
   status: JobStatus;
+  deliverableUri: string;
+  clientRating: number;
+  disputeReason: string;
 }
 
 export interface Bid {
   agent: string;
   proposedRate: bigint;
   proposal: string;
-  placedAt: bigint;
-  accepted: boolean;
+  createdAt: bigint;
 }
 
 export interface PostJobParams {
   title: string;
   description: string;
-  requiredCapability: string;
+  requiredCaps: string[];
   deadline: BigNumberish; // unix timestamp
-  autoReleaseDelay?: BigNumberish; // seconds, default 7 days
   paymentHbar: BigNumberish; // HBAR amount (will be converted to tinybars)
 }
 
