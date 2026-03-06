@@ -4,9 +4,19 @@
  */
 
 export const CONTRACTS = {
-  AgentRegistry: "0x0000000000000000000000000000000000000000", // TODO: replace after deploy
-  JobEscrow: "0x0000000000000000000000000000000000000000",
-  ReputationStaking: "0x0000000000000000000000000000000000000000",
+  AgentRegistry: "0x1fca2Bc46254583853E434677D1F5CC34B9ce9ca",
+  JobEscrow: "0xFD41170A5cE85Ef70437de337863d3469729dFb8",
+  ReputationStaking: "0x909A60F09d41c901c7F2FFFb6cdFe3F659bd9c26",
+  HACPToken: "0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed",
+};
+
+export const HEDERA_TESTNET = {
+  chainId: 296,
+  rpcUrl: "https://testnet.hashio.io/api",
+  hcsTopicId: "0.0.8099681",
+  mirrorNode: "https://testnet.mirrornode.hedera.com",
+  deployer: "0x515eE6A84cAd452a7328048d4907653b2F60846d",
+  deployedAt: "2026-03-06",
 };
 
 // Minimal ABIs for dashboard read operations

@@ -1,0 +1,18 @@
+{
+  "network": "hedera_testnet",
+  "chainId": 296,
+  "deployedAt": "2026-03-06T02:12:43.754Z",
+  "deployer": "0x515eE6A84cAd452a7328048d4907653b2F60846d",
+  "hederaAccountId": "0.0.8094073",
+  "contracts": {
+    "HACPToken": "0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed",
+    "AgentRegistry": "0x1fca2Bc46254583853E434677D1F5CC34B9ce9ca",
+    "JobEscrow": "0xFD41170A5cE85Ef70437de337863d3469729dFb8",
+    "ReputationStaking": "0x909A60F09d41c901c7F2FFFb6cdFe3F659bd9c26"
+  },
+  "hcsTopicId": "0.0.8099681",
+  "explorer": {
+    "contracts": "https://hashscan.io/testnet/contract/0x1fca2Bc46254583853E434677D1F5CC34B9ce9ca",
+    "topic": "https://hashscan.io/testnet/topic/0.0.8099681"
+  }
+}

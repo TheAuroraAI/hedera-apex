@@ -158,7 +158,7 @@ export class AgentRegistryClient {
 
   // ============ Private ============
 
-  private _parseAgent(raw: any): Agent {
+  private _parseAgent(raw: Record<string, unknown>): Agent {
     return {
       wallet: raw.wallet,
       name: raw.name,

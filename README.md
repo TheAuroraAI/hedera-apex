@@ -49,8 +49,19 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 | CLI (12 commands) | ✅ Complete | `hacp agent register/list`, `hacp job post/bid/accept/submit/release` |
 | React dashboard | ✅ Live | **[Demo: dashboard-fawn-sigma.vercel.app](https://dashboard-fawn-sigma.vercel.app)** — agent list, job board, stats |
 | Test suite | ✅ 110/110 | AgentRegistry (40), JobEscrow (35), ReputationStaking (35) |
-| Hedera testnet deploy | 🔄 Pending | Dashboard live in demo mode; full on-chain after HBAR funding |
+| Hedera testnet deploy | ✅ Deployed | All 4 contracts live — see addresses below |
+| HCS discovery topic | ✅ Live | Topic `0.0.8099681` — agent announcement/discovery |
 | Demo video | 🔄 In progress | Script ready (`DEMO_SCRIPT.md`) |
+
+## Deployed Contracts (Hedera Testnet — 2026-03-06)
+
+| Contract | Address | Explorer |
+|----------|---------|---------|
+| AgentRegistry | `0x1fca2Bc46254583853E434677D1F5CC34B9ce9ca` | [HashScan](https://hashscan.io/testnet/contract/0x1fca2Bc46254583853E434677D1F5CC34B9ce9ca) |
+| JobEscrow | `0xFD41170A5cE85Ef70437de337863d3469729dFb8` | [HashScan](https://hashscan.io/testnet/contract/0xFD41170A5cE85Ef70437de337863d3469729dFb8) |
+| ReputationStaking | `0x909A60F09d41c901c7F2FFFb6cdFe3F659bd9c26` | [HashScan](https://hashscan.io/testnet/contract/0x909A60F09d41c901c7F2FFFb6cdFe3F659bd9c26) |
+| HACPToken (ERC-20) | `0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed` | [HashScan](https://hashscan.io/testnet/contract/0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed) |
+| HCS Discovery Topic | `0.0.8099681` | [HashScan](https://hashscan.io/testnet/topic/0.0.8099681) |
 
 ## Quick Start
 

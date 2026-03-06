@@ -42,7 +42,7 @@ program
 
 // ============ Helpers ============
 
-function getConfig(opts: any): HACPConfig {
+function getConfig(opts: Record<string, unknown>): HACPConfig {
   const rpcUrl = opts.rpc ?? process.env.HEDERA_RPC_URL;
   const privateKey = opts.key ?? process.env.PRIVATE_KEY;
   const registryAddress = opts.registry ?? process.env.REGISTRY_ADDRESS;

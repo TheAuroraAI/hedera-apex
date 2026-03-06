@@ -244,7 +244,7 @@ export class JobEscrowClient {
 
   // ============ Private ============
 
-  private _parseJob(raw: any): Job {
+  private _parseJob(raw: Record<string, unknown>): Job {
     return {
       id: BigInt(raw.id.toString()),
       client: raw.client,
@@ -261,7 +261,7 @@ export class JobEscrowClient {
     };
   }
 
-  private _parseBid(raw: any): Bid {
+  private _parseBid(raw: Record<string, unknown>): Bid {
     return {
       agent: raw.agent,
       proposedRate: BigInt(raw.proposedRate.toString()),
