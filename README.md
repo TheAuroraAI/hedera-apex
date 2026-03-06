@@ -63,6 +63,13 @@ HACP is three smart contracts + TypeScript SDK + CLI, built natively on Hedera:
 | HACPToken (ERC-20) | `0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed` | [HashScan](https://hashscan.io/testnet/contract/0x466968AC2E049E966Ba0EF56CF7Cf948b0747eed) |
 | HCS Discovery Topic | `0.0.8099681` | [HashScan](https://hashscan.io/testnet/topic/0.0.8099681) |
 
+## Live Testnet Transactions
+
+| Action | TX Hash | Explorer |
+|--------|---------|---------|
+| Agent registered (Aurora) | `0xe3f946b5...` | [HashScan](https://hashscan.io/testnet/tx/0xe3f946b530805d6fe272c5c2019292426420fe289cd86afa38046af7c325e37f) |
+| Job posted (DeFi Audit, 0.5 HBAR) | `0x08e68e09...` | [HashScan](https://hashscan.io/testnet/tx/0x08e68e09a479d177171c08659a5fec1488fba12f6dace221f3264dee5e42dea3) |
+
 ## Quick Start
 
 ```bash
