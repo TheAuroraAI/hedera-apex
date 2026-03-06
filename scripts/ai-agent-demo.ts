@@ -655,7 +655,7 @@ async function main(): Promise<void> {
   // ── 2. Fund Bob if needed ───────────────────────────────────────────────────
   // On Hedera testnet, transferring to a new EVM address may require a higher
   // gas limit because Hedera auto-creates the account on first receipt.
-  if (bobBalance < ethers.parseEther("0.5")) {
+  if (bobBalance < ethers.parseEther("2.0")) {
     console.log("\n  Transferring 3 HBAR from Alice to Bob for gas...");
     try {
       const fundTx = await aliceWallet.sendTransaction({
